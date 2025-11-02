@@ -1,0 +1,55 @@
+:root 
+{--gradienteDaLetra: linear-gradient(to bottom, rgb(255, 255, 255) 0 12.5%, rgb(250, 250, 250) 12.5% 18.75%, rgb(245, 245, 245) 18.75% 25%, rgb(240, 240, 240) 25% 31.25%, rgb(236, 236, 236) 31.25% 37.5%, rgb(231, 231, 231) 37.5% 43.75%, rgb(226, 226, 226) 43.75% 50%, rgb(221, 221, 221) 50% 56.25%, rgb(216, 216, 216) 56.25% 62.5%, rgb(211, 211, 211) 62.5% 68.75%, rgb(206, 206, 206) 68.75% 75%, rgb(201, 201, 201) 75% 81.25%, rgb(196, 196, 196) 81.25% 87.5%, rgb(191, 191, 191) 87.5% 93.75%, rgb(186, 186, 186) 93.75% 100%, rgb(181, 181, 181) 100% 100%);
+}
+
+#main
+{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container
+{
+    align-self: center;
+    justify-self: center;
+    height: 85%;
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: white;
+    image-rendering: pixelated;
+    background-image: url('../assets/bgtile_1.png');
+    background-repeat: repeat;
+    background-size: 110px;
+
+}
+
+
+#inputGroup
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#inputGroup input 
+{
+    border-radius: 15px;
+    width: 75%;
+    height: 35px;
+    background-color: #2B1016;
+    color: white;
+    padding: 5px;
+    padding-left: 15px;
+    outline: none;
+    
+}
+
