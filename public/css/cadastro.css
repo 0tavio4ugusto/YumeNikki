@@ -53,3 +53,16 @@
     
 }
 
+#btCadastro 
+{
+    height: 60px;
+    width: 30%;
+    background-color: #2B1016;
+    color: #CDCDCD;
+    cursor:pointer ;
+}
+
+#btCadastro:hover {
+    background-color: #36141b;
+}
+
