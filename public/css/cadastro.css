@@ -26,6 +26,7 @@
     background-image: url('../assets/bgtile_1.png');
     background-repeat: repeat;
     background-size: 110px;
+     backdrop-filter: blur(4px);
 
 }
 
@@ -65,4 +66,24 @@
 #btCadastro:hover {
     background-color: #36141b;
 }
+
+#inputFolder 
+{
+    display: flex;
+    flex-direction: row;
+
+}
+
+#lableGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+#lableGroup h4 {
+
+}
+
+
 
