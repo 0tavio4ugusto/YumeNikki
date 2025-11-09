@@ -89,20 +89,18 @@
         console.log("resposta: ", res);
 
         if (res.ok) {
-          Alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")   
+          alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")   
 
           setTimeout(() => {
             window.location = "login.html";
-          }, "2000");
-          limparFormulario();
+          }, "1000");
 
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
-      })
-      .catch(function (res) {
+      }).catch(function (res) {
         console.log(`#ERRO: ${res}`);
-      });
+      })
 
     return false;
         
