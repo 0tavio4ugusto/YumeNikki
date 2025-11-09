@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realidade - Cadastro </title>
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/geral.css">
+    <script src="./js/sessao.js"></script>
+
+</head>
+<body>
+
+    <div id="background"></div>
+    <div id="bgOverlay"></div>
+
+    <div id="main">
+        <div id="container" class="bordaPixel">
+            <h2 class="gradienteTexto negrito titulos">CADASTRO</h2>
+            <div id="inputFolder">
+
+                <div id="lableGroup">
+                    <h5 class="gradienteTexto">NICKNAME</h5>
+                    <h5 class="gradienteTexto">PRIMEIRO NOME</5>
+                    <h5 class="gradienteTexto">EMAIL</h5>
+                    <h5 class="gradienteTexto">SENHA</h5>
+                    <h5 class="gradienteTexto">CONFIRMAR SENHA</h5> 
+                </div>
+
+                <div id="inputGroup">
+                
+                <audio autoplay loop src="assets/songs/cadastro.mp3"></audio>
+                <input type="text" class="bordaPixel" id="iptNick" placeholder="Nickname">
+                <input type="text" class="bordaPixel" id="iptNome" placeholder="Primeiro Nome">
+                <input type="text" class="bordaPixel" id="iptEmail" placeholder="Email">
+                <input type="password" class="bordaPixel" id="iptSenha" placeholder="Senha">
+                <input type="password" class="bordaPixel" id="iptConfSenha" placeholder="Confirme a senha">
+
+            </div>
+
+            </div>
+
+            <div id="divErr">
+
+            </div>
+
+            
+            <button id="btCadastro" class="bordaPixel" onclick="cadastrar()">Cadastrar</button>
+        </div>
+    </div>
+    
+</body>
+<script>
+
+    function cadastrar() {
+
+    nickVar = iptNick.value
+    nomeVar = iptNome.value
+    emailVar = iptEmail.value
+    senhaVar = iptSenha.value
+    confSenhaVar = iptConfSenha.value
+
+    //Validar os campos em branco
+
+    if (
+        nickVar == "" ||
+        nomeVar == "" ||
+        senhaVar == "" ||
+        emailVar == "" ||
+        confSenhaVar == "" 
+    ) {alert('Confira se todos os campos foram preenchidos')} 
+    else { alert("Realizando a tentativa de cadastro...") }
+
+        // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nickServer: nickVar,
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      })
+    }).then(function (res) {
+        console.log("resposta: ", res);
+
+        if (res.ok) {
+          Alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")   
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+          limparFormulario();
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (res) {
+        console.log(`#ERRO: ${res}`);
+      });
+
+    return false;
+        
+    }
+</script>
+</html>

@@ -10,9 +10,9 @@ FLUSH PRIVILEGES;
 CREATE TABLE usuarios (
 idusuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
-nickname VARCHAR(45),
 email VARCHAR(45),
-senha VARCHAR(45)
+senha VARCHAR(45),
+nick VARCHAR(45)
 );
 
 CREATE TABLE segredos (
