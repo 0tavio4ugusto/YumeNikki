@@ -39,6 +39,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    padding-top: 50px;
 }
 
 #inputGroup input 
@@ -52,6 +53,7 @@
     padding-left: 15px;
     outline: none;
     
+    
 }
 
 #btCadastro 
@@ -63,14 +65,42 @@
     cursor:pointer ;
 }
 
+#buttonContainer #btCadastro 
+{
+    height: 60px;
+    width: 100%;
+    background-color: #2B1016;
+    color: #CDCDCD;
+    cursor:pointer ;
+}
+
 #btCadastro:hover {
     background-color: #36141b;
+}
+
+#buttonContainer 
+{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    gap: 10px;
+    font-size: small;
+    align-items: center;
+    padding-bottom: 200px;
+
+}
+
+#aqui:hover {
+    cursor: pointer;
 }
 
 #inputFolder 
 {
     display: flex;
     flex-direction: row;
+    padding-top: 50px;
 
 }
 
@@ -79,6 +109,7 @@
     flex-direction: column;
     justify-content: space-around;
     gap: 10px;
+    padding-top: 50px;
 }
 
 #lableGroup h4 {

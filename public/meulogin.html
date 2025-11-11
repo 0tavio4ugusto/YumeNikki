@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/cadastroLogin.css">
+    <link rel="stylesheet" href="./css/geral.css">
+    <script src="./js/sessao.js"></script>
+    <title>Realidade - Login</title>
+</head>
+<body>
+
+    <div id="background"></div>
+    <div id="bgOverlay"></div>
+
+    <div id="main">
+        <div id="container" class="bordaPixel">
+            <h2 class="gradienteTexto negrito titulos" style="padding-top: 20px;">LOGIN</h2>
+            <div id="inputFolder">
+
+                <div id="lableGroup">
+                    <h5 class="gradienteTexto">NICKNAME</h5>
+                    <h5 class="gradienteTexto">SENHA</h5>
+                </div>
+
+                <div id="inputGroup">
+                <input type="text" class="bordaPixel" id="iptEmail" placeholder="Email">
+                <input type="password" class="bordaPixel" id="iptSenha" placeholder="Senha">
+
+            </div>
+
+            </div>
+
+            <div id="divErr">
+
+            </div>
+
+            <div id="buttonContainer">
+                <button id="btCadastro" class="bordaPixel" onclick="entrar()">SONHAR</button>
+            </div>
+            <p class="gradienteTexto">Ainda não explora sonhos? Clique <span id="aqui" class="gradienteTexto">AQUI</span></p>
+            
+
+        </div>
+    </div>
+    
+</body>
+<script>
+            function entrar() {
+
+            if (emailVar == "" || senhaVar == "") {
+            alert(`Preencha todos os campos de Login`)
+            return false;
+        }
+                
+            fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (res) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (res.ok) {
+                console.log(res);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.NICK_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    window.location = "./dashboard/cards.html";
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+
+        
+</script>
+</html>
