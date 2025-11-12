@@ -1,0 +1,28 @@
+*
+{
+
+    padding: 0px;
+    margin: 0px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    image-rendering: pixelated;
+}
+
+#container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    height: 90%;
+    width: 90%;
+
+}
+
+#container h2 
+{
+    color: aliceblue;
+    font-family: 'yummy nickels', 'Regular';
+}
