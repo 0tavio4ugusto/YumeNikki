@@ -24,7 +24,7 @@
                 </div>
 
                 <div id="inputGroup">
-                <input type="text" class="bordaPixel" id="iptEmail" placeholder="Email">
+                <input type="text" class="bordaPixel" id="iptNick" placeholder="Nick">
                 <input type="password" class="bordaPixel" id="iptSenha" placeholder="Senha">
 
             </div>
@@ -46,9 +46,13 @@
     
 </body>
 <script>
-            function entrar() {
 
-            if (emailVar == "" || senhaVar == "") {
+    
+    function entrar() {
+        
+                var nickVar = iptNick.value;
+                var senhaVar = iptSenha.value;
+            if (nickVar == "" || senhaVar == "") {
             alert(`Preencha todos os campos de Login`)
             return false;
         }
@@ -59,7 +63,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
+                nickServer: nickVar,
                 senhaServer: senhaVar
             })
         }).then(function (res) {
@@ -68,11 +72,12 @@
             if (res.ok) {
                 console.log(res);
 
-                resposta.json().then(json => {
+                res.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.NICK_USUARIO = json.email;
+                    sessionStorage.NICK_USUARIO = json.nick;
                     sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.ID_USUARIO = json.id;
                     window.location = "./dashboard/cards.html";
                 });
@@ -81,9 +86,8 @@
 
                 console.log("Houve um erro ao tentar realizar o login!");
 
-                resposta.text().then(texto => {
+                res.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
                 });
             }
 
