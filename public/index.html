@@ -15,17 +15,66 @@
 
 <body>
 
-  <div id="container">
+  <div id="separador">
 
-    <img src="./assets/imgs/logo.jpg" alt=""> 
-    <img src="assets/imgs/madotsukiSpin.gif" alt="">
-    <h2>Ver 0.0.1</h2>
+  </div>
+
+  <div id="container">
     
-    
+    <div>
+      <img id="logo" src="./assets/imgs/logo.jpg" alt=""> 
+    </div>
+    <div id="botoes">
+      <button onclick="cadastrar()">Cadastrar</button>
+      <button onclick="logar()">Logar</button>
+    </div>
+    <img  style="z-index: 2; margin-bottom: 50px; margin-top: 20px;" src="assets/imgs/madotsukiSpin.gif" alt="">   
+  </div>
+  <h2 style="font-size: 20px;">Ver 0.0.1</h2>
+
+  <h2>- Sobre Yume Nikki -</h2>
+  <div id="aboutYN">
+    <div id="aboutContainer">
+      <img style="height: 400px; image-rendering: pixelated;" src="assets/imgs/train.gif" alt="">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, fugit voluptate excepturi deserunt est quisquam reprehenderit voluptatem labore tenetur soluta mollitia ducimus quas rerum provident eaque culpa cum rem nulla facilis voluptates ipsa magnam consequatur modi esse? Vitae quisquam architecto quam, nostrum omnis sequi id! Placeat esse quos aspernatur deserunt.</p>
+    </div>
+
+  </div>
+
+    <div id="aboutYN">
+    <div id="aboutContainer">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod a laudantium repellat odit at corrupti corporis perferendis commodi expedita cumque culpa possimus, eaque reprehenderit, facere animi deserunt sunt voluptate saepe fuga, dolores nihil. Ut, illum quae. Itaque esse odio placeat illum doloremque. Assumenda minima deleniti possimus sequi? Repudiandae, nostrum reiciendis! Optio doloremque, temporibus a porro earum reiciendis quibusdam numquam officiis totam illo vero ut sed, enim, quod ab assumenda necessitatibus eveniet! Laboriosam quaerat recusandae assumenda praesentium, quos illum quod quibusdam voluptatum reiciendis consectetur, aut, exercitationem nostrum hic officia odio ex consequatur corporis tenetur. Sunt animi officia aspernatur, neque qui fugit?</p>
+      <img style=" border-radius: 20px; margin-left: 50px; height: 300px; image-rendering: pixelated;" src="assets/imgs/meninas.gif" alt="">
+    </div>
+
+  </div>
+
+  <div>
+    <h2> - Sobre Mim - </h2>
+      <div id="aboutYN">
+    <div id="aboutContainer">
+      <img style=" border-radius: 20px; margin-right: 50px; height: 200px; image-rendering: pixelated;" src="assets/imgs/sptech.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, fugit voluptate excepturi deserunt est quisquam reprehenderit voluptatem labore tenetur soluta mollitia ducimus quas rerum provident eaque culpa cum rem nulla facilis voluptates ipsa magnam consequatur modi esse? Vitae quisquam architecto quam, nostrum omnis sequi id! Placeat esse quos aspernatur deserunt.</p>
+    </div>
+
+  </div>
   </div>
   
 
     
   </body>
+
+  <script>
+
+    function logar() {
+      window.location = '/meulogin.html'      
+    }
+
+    function cadastrar() {
+      window.location = '/meucadastro.html'
+      
+    }
+
+  </script>
 
 </html>
