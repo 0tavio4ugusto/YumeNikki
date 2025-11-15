@@ -2,6 +2,7 @@ var usuarioModel = require("../models/usuarioModel");
 
 
 function autenticar(req, res) {
+    
     var nick = req.body.nickServer;
     var senha = req.body.senhaServer;
 
@@ -75,8 +76,7 @@ function somar(req, res) {
             res.status(500).json(erro.sqlMessage);
         });
         
-    }
-
+    } else
     usuarioModel.somar(tempo, idUsuario, idPagina)
         .then(function (resultado) {
             res.json(resultado);

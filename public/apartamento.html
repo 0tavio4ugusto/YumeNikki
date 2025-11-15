@@ -28,61 +28,75 @@
 
     tempo = 0
 
-    setInterval(() => {
-        tempo++;
-        console.log("tempo:", tempo);
-    }, 1000);
-
-    setInterval(() => {
-        somar()
-    }, 4000);
-
-
     fetch("/usuarios/checar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            idUsuario: sessionStorage.ID_USUARIO
+            idUsuario: sessionStorage.ID_USUARIO,
+            tempoAntigo: sessionStorage.TEMPO_ANTIGO
         })
     })
         .then(res => res.json())
         .then(lista => {
             if (lista.length === 0) {
+
                 console.log("Primeira vez acessando a página.")
-                somar()
+                fetch("usuarios/somar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        idUsuario: sessionStorage.ID_USUARIO,
+                        tempoAntigo: lista.tempoAntigo,
+                        tempo: 0,
+                        idPagina: 0,
+                        lista: lista.length
+                    })
+
+
+                }).then(res => res.json())
+                    .then(r => {
+                        console.log("Primeiro registro inserido:", r);
+                    })
+                    .catch(err => console.log("Erro ao registrar tempo:", err));
             } else {
+                var tempoBanco = Number(lista[0].tempo);
                 console.log("Já acessou antes.");
+
+                setInterval(() => {
+                    tempo++;
+                    console.log("tempo:", (tempoBanco + tempo));
+                }, 1000);
+
+                setInterval(() => {
+                    fetch("usuarios/somar", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            idUsuario: sessionStorage.ID_USUARIO,
+                            tempoAntigo: tempoBanco,
+                            tempo: tempoBanco+tempo,
+                            idPagina: 0,
+                            lista: lista.length
+                        })
+
+
+                    }).then(res => res.json())
+                        .then(r => {
+                            console.log("Primeiro registro inserido:", r);
+                        })
+                        .catch(err => console.log("Erro ao registrar tempo:", err));
+                }, 4000);
             }
         })
         .catch(err => {
             console.log("Erro na requisição:", err);
         });
-
-
-    function somar() {
-
-        fetch("usuarios/somar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                idUsuario: sessionStorage.ID_USUARIO,
-                tempo: tempo,
-                idPagina: 0,
-                lista: lista.length
-            })
-
-
-        }).then(res => res.json())
-            .then(r => {
-                console.log("Primeiro registro inserido:", r);
-            })
-            .catch(err => console.log("Erro ao registrar tempo:", err));
-
-    }
 
 </script>
 

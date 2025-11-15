@@ -120,7 +120,7 @@
             if (res.ok) {
                 console.log(res);
 
-                resposta.json().then(json => {
+                res.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.NICK_USUARIO = json.nick;
