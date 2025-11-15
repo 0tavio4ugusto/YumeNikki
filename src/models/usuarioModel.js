@@ -22,7 +22,36 @@ function cadastrar(nome, email, senha, nick) {
     return database.executar(instrucaoSql);
 }
 
+function checar(idUsuario) {
+    var instrucaoSql = `
+    SELECT * FROM tempo WHERE idusuario = '${idUsuario}'`
+    
+    console.log("aaaExecutando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+
+}
+
+function contar(tempo, idUsuario, idPagina) {
+
+        var instrucaoSql = `
+        UPDATE tempo SET tempo = '${tempo}' WHERE idusuario = ${idUsuario} AND idpagina = ${idPagina};`
+        return database.executar(instrucaoSql);
+
+    
+}
+
+function somar(tempo, idUsuario, idPagina) {
+        var instrucaoSql = `
+        INSERT INTO tempo (idtempo, tempo, idusuario, idpagina) VALUES (DEFAULT, '${tempo}', '${idUsuario}', '${idPagina}')`
+        return database.executar(instrucaoSql);
+
+    
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    checar,
+    contar,
+    somar
 };

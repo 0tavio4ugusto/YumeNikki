@@ -1,0 +1,91 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    background-color: black;
+    overflow: hidden;
+}
+
+#interativo 
+{ 
+
+    
+    z-index: 1;
+    background-color: transparent;
+    height: 100vh;
+    width: 100%;
+}
+
+#bg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+}
+
+#bg img{
+    z-index: 0;
+    position: absolute;
+    bottom: -100px;
+    image-rendering: pixelated;
+    height: auto;
+    width: 80%;
+}
+
+.movel 
+{
+    display: flex;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    color: transparent;
+    background-color: brown;
+}
+
+.movel:hover 
+{
+    overflow: visible;
+    font-size: 25px;
+    font-family: 'yummy nickels', 'Regular';
+    color: #210c07;
+    cursor: pointer;
+
+      text-shadow:
+    -1px -1px 0px white,
+     1px -1px 0px white,
+    -1px  1px 0px white,
+     1px  1px 0px white;
+
+}
+
+#cama
+{
+    height: 110px;
+    position: fixed;
+    left: 440px;
+    top: 265px;
+    background-color: transparent;
+    
+}
+
+#computador
+{
+    height: 70px;
+    width: 150px;
+    position: fixed;
+    left: 760px;
+    top: 190px;
+    background-color: transparent;
+    
+}
+
+#porta
+{
+    height: 110px;
+    width: 50px;
+    position: fixed;
+    left: 950px;
+    top: 330px;
+    background-color: transparent;
+    
+}

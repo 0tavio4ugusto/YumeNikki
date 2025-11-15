@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APARTAMENTO</title>
+    <link rel="stylesheet" href="./css/geral.css">
+    <link rel="stylesheet" href="./css/ap.css">
+</head>
+
+<body>
+
+    <div id="bg">
+        <img src="./assets/apartamento.png" alt="">
+    </div>
+
+    <div id="interativo">
+        <div class="movel" id="cama">SONHAR</div>
+        <div class="movel" id="computador">ESTATÍSTICAS</div>
+        <div class="movel" id="porta">SAIR</div>
+    </div>
+
+
+</body>
+
+<script>
+
+    tempo = 0
+
+    setInterval(() => {
+        tempo++;
+        console.log("tempo:", tempo);
+    }, 1000);
+
+    setInterval(() => {
+        somar()
+    }, 4000);
+
+
+    fetch("/usuarios/checar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuario: sessionStorage.ID_USUARIO
+        })
+    })
+        .then(res => res.json())
+        .then(lista => {
+            if (lista.length === 0) {
+                console.log("Primeira vez acessando a página.")
+                somar()
+            } else {
+                console.log("Já acessou antes.");
+            }
+        })
+        .catch(err => {
+            console.log("Erro na requisição:", err);
+        });
+
+
+    function somar() {
+
+        fetch("usuarios/somar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                tempo: tempo,
+                idPagina: 0,
+                lista: lista.length
+            })
+
+
+        }).then(res => res.json())
+            .then(r => {
+                console.log("Primeiro registro inserido:", r);
+            })
+            .catch(err => console.log("Erro ao registrar tempo:", err));
+
+    }
+
+</script>
+
+</html>

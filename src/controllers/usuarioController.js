@@ -38,6 +38,55 @@ function autenticar(req, res) {
 
 }
 
+function checar(req,res) {
+    
+    var idUsuario = req.body.idUsuario;
+
+        usuarioModel.checar(idUsuario)
+            .then(function(resultadoChecar){
+                console.log(`\nResultados encontrados: ${resultadoChecar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoChecar)}`);
+                res.json(resultadoChecar)
+            })
+            .catch(function(erro) {
+                console.log(erro)
+                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            } ) 
+    
+
+    
+}
+
+function somar(req, res) {
+    
+    var tempo = req.body.tempo;
+    var idUsuario = req.body.idUsuario;
+    var idPagina = req.body.idPagina;
+    var lista = req.body.lista;
+
+    if (lista != 0) {
+
+        usuarioModel.contar(tempo, idUsuario, idPagina)
+            .then(function (resultado) {
+                res.json(resultado)
+            }).catch(function (erro) {
+            console.log("Erro ao contar:", erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+        
+    }
+
+    usuarioModel.somar(tempo, idUsuario, idPagina)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log("Erro ao somar:", erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nick = req.body.nickServer;
@@ -77,5 +126,7 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    checar,
+    somar
 }

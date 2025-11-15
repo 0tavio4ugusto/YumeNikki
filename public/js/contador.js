@@ -1,0 +1,3 @@
+function contarTempo() {}
+
+function jogarTempoNoBanco() {}
