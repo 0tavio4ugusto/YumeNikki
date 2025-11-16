@@ -19,6 +19,7 @@
         <div class="movel" id="cama">SONHAR</div>
         <div class="movel" id="computador">ESTATÍSTICAS</div>
         <div class="movel" onclick="sair()" id="porta">SAIR</div>
+        <div class="movel" id="segredo" onclick="segredo()"></div>
     </div>
 
 
@@ -80,7 +81,7 @@
                         body: JSON.stringify({
                             idUsuario: sessionStorage.ID_USUARIO,
                             tempoAntigo: tempoBanco,
-                            tempo: tempoBanco+tempo,
+                            tempo: tempoBanco + tempo,
                             idPagina: 0,
                             lista: lista.length
                         })
@@ -98,10 +99,86 @@
             console.log("Erro na requisição:", err);
         });
 
-        function sair() {
-            window.location = "index.html"
-            
-        }
+    function sair() {
+        window.location = "index.html"
+
+    }
+
+    function segredo() {
+
+        fetch("/segredos/buscar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                pagina: `apartamento`,
+            })
+        }).then(res => {
+            if (!res.ok) {
+                throw new Error("Erro ao na busca");
+            }
+            return res.json();
+        })
+            .then(dados => {
+                console.log("Resultado da busca:", dados);
+
+                if (dados.length === 0) {
+                    console.log("INSERT");
+                    insert()
+
+                } else {
+                    console.log("UPDATE");
+                    update()
+
+                }
+            })
+            .catch(err => {
+                console.error("Erro:", err);
+            });
+    }
+
+    function insert() {
+
+        fetch("/segredos/inserir", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                pagina: "apartamento"
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Inserido com sucesso:", data);
+            })
+            .catch(err => console.log("Erro no INSERT:", err));
+
+    }
+
+    function update() {
+
+        fetch("/segredos/salvar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                pagina: "apartamento"
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Att com sucesso:", data);
+            })
+            .catch(err => console.log("Erro no INSERT:", err));
+
+
+    }
 
 </script>
 

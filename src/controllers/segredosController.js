@@ -1,4 +1,4 @@
-var segredosModel = require("../models/segredosModel");
+var segredosModel = require("../models/segredoModel");
 
 function salvar(req, res) {
     var idUsuario = req.body.idUsuario;
