@@ -18,7 +18,7 @@
     <div id="interativo">
         <div class="movel" id="cama">SONHAR</div>
         <div class="movel" id="computador">ESTATÍSTICAS</div>
-        <div class="movel" id="porta">SAIR</div>
+        <div class="movel" onclick="sair()" id="porta">SAIR</div>
     </div>
 
 
@@ -97,6 +97,11 @@
         .catch(err => {
             console.log("Erro na requisição:", err);
         });
+
+        function sair() {
+            window.location = "index.html"
+            
+        }
 
 </script>
 

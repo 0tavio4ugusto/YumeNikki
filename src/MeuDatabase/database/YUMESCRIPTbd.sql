@@ -16,25 +16,36 @@ nick VARCHAR(45)
 );
 
 CREATE TABLE segredos (
-idsegredo INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45),
-info VARCHAR(45)
+idsegredo INT AUTO_INCREMENT,
+idusuario INT,
+apartamento INT,
+engrenagens INT,
+floresta INT,
+apartamentos INT,
+cassino INT,
+escuro INT,
+livraria INT,
+
+CONSTRAINT FOREIGN KEY fkusuario (idusuario) REFERENCES usuarios(idusuario),
+CONSTRAINT PRIMARY KEY (idsegredo, idusuario)
+
 );
 
 CREATE TABLE usuario_segredo (
 idusuario INT,
 idsegredo INT,
 CONSTRAINT PRIMARY KEY (idusuario, idsegredo),
-dtpegou DATE,
+dtpegou DATE DEFAULT CURRENT_DATE,
 	CONSTRAINT FOREIGN KEY fkusuario (idusuario) REFERENCES usuarios(idusuario),
     CONSTRAINT FOREIGN KEY fksegredo (idsegredo) REFERENCES segredos(idsegredo)
 );
 
 CREATE TABLE tempo (
 idtempo INT PRIMARY KEY AUTO_INCREMENT,
-tempo DATE,
+tempo INT,
 idusuario INT,
 idpagina INT
+    CONSTRAINT FOREIGN KEY fkusuario (idusuario) REFERENCES usuarios(idusuario)
 );
 
 
