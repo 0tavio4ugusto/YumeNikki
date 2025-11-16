@@ -31,7 +31,7 @@ function inserir(idUsuario, pagina) {
     };
 
     // a pagina que eu to vira 1
-    colunas[pagina] = 1;
+    col[pagina] = 1;
 
      instrucaoSql = `
         INSERT INTO segredos (
@@ -45,16 +45,17 @@ function inserir(idUsuario, pagina) {
             livraria
         ) VALUES (
             ${idUsuario},
-            ${colunas.apartamento},
-            ${colunas.engrenagens},
-            ${colunas.floresta},
-            ${colunas.apartamentos},
-            ${colunas.cassino},
-            ${colunas.escuro},
-            ${colunas.livraria}
+            ${col.apartamento},
+            ${col.engrenagens},
+            ${col.floresta},
+            ${col.apartamentos},
+            ${col.cassino},
+            ${col.escuro},
+            ${col.livraria}
         );
-    `;
 
+        INSERT INTO usuario_segredo VALUES (${idUsuario,})
+    `;
     console.log("Executando SQL:\n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }

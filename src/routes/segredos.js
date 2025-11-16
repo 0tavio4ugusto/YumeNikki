@@ -11,4 +11,9 @@ router.post("/buscar", function(req, res) {
     segredosController.buscar(req, res);
 });
 
+router.post("/inserir", function(req, res) {
+    segredosController.inserir(req, res);
+});
+
+
 module.exports = router;

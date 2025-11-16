@@ -33,15 +33,14 @@ CONSTRAINT PRIMARY KEY (idsegredo, idusuario)
 );
 
 CREATE TABLE usuario_segredo (
+    idhora PRIMARY KEY AUTO_INCREMENT,
     idusuario INT,
-    idsegredo INT,
+    segredo VARCHAR(45),
     dtpegou DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT pksegredo PRIMARY KEY (idusuario, idsegredo),
 
-    CONSTRAINT fkusuario FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
-
-    CONSTRAINT fksegredo FOREIGN KEY (idsegredo) REFERENCES segredos(idsegredo)
+    CONSTRAINT fkusuario FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario)
 );
 
 CREATE TABLE tempo (

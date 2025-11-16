@@ -61,8 +61,10 @@
                 }).then(res => res.json())
                     .then(r => {
                         console.log("Primeiro registro inserido:", r);
+                    
                     })
                     .catch(err => console.log("Erro ao registrar tempo:", err));
+
             } else {
                 var tempoBanco = Number(lista[0].tempo);
                 console.log("Já acessou antes.");
@@ -154,6 +156,11 @@
             .then(res => res.json())
             .then(data => {
                 console.log("Inserido com sucesso:", data);
+                alert("Você encontrou o segredo do apartamento!")
+                setTimeout(() => {
+                    location.reload()                    
+                }, 2000);
+
             })
             .catch(err => console.log("Erro no INSERT:", err));
 
@@ -174,6 +181,9 @@
             .then(res => res.json())
             .then(data => {
                 console.log("Att com sucesso:", data);
+                alert("Voce ja encontrou esse segredo!")
+                location.reload()
+
             })
             .catch(err => console.log("Erro no INSERT:", err));
 

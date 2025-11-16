@@ -1,5 +1,19 @@
 var segredosModel = require("../models/segredoModel");
 
+function inserir(req, res) {
+    var idUsuario = req.body.idUsuario;
+    var pagina = req.body.pagina;
+
+    segredosModel.inserir(idUsuario, pagina)
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log("Erro no INSERT:", erro);
+            res.status(500).json(erro);
+        });
+}
+
 function salvar(req, res) {
     var idUsuario = req.body.idUsuario;
     var pagina = req.body.pagina;
@@ -9,7 +23,6 @@ function salvar(req, res) {
             res.json(resultado);
         })
         .catch(function (erro) {
-            console.log(erro);
             res.status(500).json(erro);
         });
 }
@@ -27,6 +40,7 @@ function buscar(req, res) {
 }
 
 module.exports = {
+    inserir,
     salvar,
     buscar
 };
