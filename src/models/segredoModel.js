@@ -54,7 +54,7 @@ function inserir(idUsuario, pagina) {
             ${col.livraria}
         );
 
-        INSERT INTO usuario_segredo VALUES (${idUsuario,})
+        INSERT INTO usuario_segredo (idusuario, segredo,) VALUES (${idUsuario}, '${pagina}')
     `;
     console.log("Executando SQL:\n" + instrucaoSql);
     return database.executar(instrucaoSql);

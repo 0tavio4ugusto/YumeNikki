@@ -37,9 +37,6 @@ CREATE TABLE usuario_segredo (
     idusuario INT,
     segredo VARCHAR(45),
     dtpegou DATETIME DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT pksegredo PRIMARY KEY (idusuario, idsegredo),
-
     CONSTRAINT fkusuario FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario)
 );
 
