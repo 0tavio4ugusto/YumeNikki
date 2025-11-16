@@ -5,6 +5,7 @@ CREATE USER 'YUME'@'%' IDENTIFIED BY 'Yumenikki@2025';
 
 GRANT INSERT ON YUMENIKKI.* TO 'YUME'@'%';
 GRANT SELECT ON YUMENIKKI.* TO 'YUME'@'%';
+GRANT UPDATE ON YUMENIKKI.* TO 'YUME'@'%';
 FLUSH PRIVILEGES;
 
 CREATE TABLE usuarios (
@@ -34,8 +35,8 @@ CONSTRAINT PRIMARY KEY (idsegredo, idusuario)
 CREATE TABLE usuario_segredo (
 idusuario INT,
 idsegredo INT,
-CONSTRAINT PRIMARY KEY (idusuario, idsegredo),
-dtpegou DATE DEFAULT CURRENT_DATE
+CONSTRAINT pksegredo PRIMARY KEY (idusuario, idsegredo),
+dtpegou DATE DEFAULT CURRENT_DATE,
 	CONSTRAINT fkusuario FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
     CONSTRAINT fksegredo FOREIGN KEY (idsegredo) REFERENCES segredos(idsegredo)
 );
@@ -44,7 +45,7 @@ CREATE TABLE tempo (
 idtempo INT PRIMARY KEY AUTO_INCREMENT,
 tempo INT,
 idusuario INT,
-idpagina INT
+idpagina INT,
     CONSTRAINT FOREIGN KEY fkusuario (idusuario) REFERENCES usuarios(idusuario)
 );
 
