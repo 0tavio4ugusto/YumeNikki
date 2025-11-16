@@ -49,7 +49,7 @@ idtempo INT PRIMARY KEY AUTO_INCREMENT,
 tempo INT,
 idusuario INT,
 idpagina INT,
-    CONSTRAINT FOREIGN KEY fkusuario (idusuario) REFERENCES usuarios(idusuario)
+    CONSTRAINT FOREIGN KEY fkusuarioo (idusuario) REFERENCES usuarios(idusuario)
 );
 
 
