@@ -35,9 +35,9 @@ CREATE TABLE usuario_segredo (
 idusuario INT,
 idsegredo INT,
 CONSTRAINT PRIMARY KEY (idusuario, idsegredo),
-dtpegou DATE DEFAULT CURRENT_DATE,
-	CONSTRAINT fkusuario FOREIGN KEY  (idusuario) REFERENCES usuarios(idusuario),
-    CONSTRAINT fksegredo FOREIGN KEY  (idsegredo) REFERENCES segredos(idsegredo)
+dtpegou DATE DEFAULT CURRENT_DATE
+	CONSTRAINT fkusuario FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
+    CONSTRAINT fksegredo FOREIGN KEY (idsegredo) REFERENCES segredos(idsegredo)
 );
 
 CREATE TABLE tempo (
