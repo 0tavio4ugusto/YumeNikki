@@ -33,7 +33,7 @@ CONSTRAINT PRIMARY KEY (idsegredo, idusuario)
 );
 
 CREATE TABLE usuario_segredo (
-    idhora PRIMARY KEY AUTO_INCREMENT,
+    idhora INT PRIMARY KEY AUTO_INCREMENT,
     idusuario INT,
     segredo VARCHAR(45),
     dtpegou DATETIME DEFAULT CURRENT_TIMESTAMP,
