@@ -26,7 +26,7 @@ cassino INT,
 escuro INT,
 livraria INT,
 
-CONSTRAINT FOREIGN KEY fkusuario (idusuario) REFERENCES usuarios(idusuario),
+CONSTRAINT fkusuario FOREIGN KEY  (idusuario) REFERENCES usuarios(idusuario),
 CONSTRAINT PRIMARY KEY (idsegredo, idusuario)
 
 );
