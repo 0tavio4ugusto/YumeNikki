@@ -35,7 +35,7 @@ CONSTRAINT PRIMARY KEY (idsegredo, idusuario)
 CREATE TABLE usuario_segredo (
     idusuario INT,
     idsegredo INT,
-    dtpegou DATE DEFAULT CURRENT_DATE,
+    dtpegou DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT pksegredo PRIMARY KEY (idusuario, idsegredo),
 
