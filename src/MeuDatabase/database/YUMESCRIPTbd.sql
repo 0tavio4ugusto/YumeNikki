@@ -33,11 +33,14 @@ CONSTRAINT PRIMARY KEY (idsegredo, idusuario)
 );
 
 CREATE TABLE usuario_segredo (
-idusuario INT,
-idsegredo INT,
-CONSTRAINT pksegredo PRIMARY KEY (idusuario, idsegredo),
-dtpegou DATE DEFAULT CURRENT_DATE,
-	CONSTRAINT fkusuario FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
+    idusuario INT,
+    idsegredo INT,
+    dtpegou DATE DEFAULT CURRENT_DATE,
+
+    CONSTRAINT pksegredo PRIMARY KEY (idusuario, idsegredo),
+
+    CONSTRAINT fkusuario FOREIGN KEY (idusuario) REFERENCES usuarios(idusuario),
+
     CONSTRAINT fksegredo FOREIGN KEY (idsegredo) REFERENCES segredos(idsegredo)
 );
 
