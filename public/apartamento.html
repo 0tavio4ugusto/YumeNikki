@@ -22,6 +22,11 @@
         <div class="movel" id="segredo" onclick="segredo()"></div>
     </div>
 
+    <div id="tutorial">
+        <div id="calibrador1"></div>
+        <div id="calibrador2"></div>
+    </div>
+
 
 </body>
 
@@ -101,10 +106,7 @@
             console.log("Erro na requisição:", err);
         });
 
-    function sair() {
-        window.location = "index.html"
 
-    }
 
     function segredo() {
 
@@ -187,6 +189,21 @@
             })
             .catch(err => console.log("Erro no INSERT:", err));
 
+
+    }
+
+        function sair() {
+        window.location = "index.html"
+
+    }
+
+        function sonhar() {
+        window.location = "nexus.html"
+        
+    }
+
+        function estatisticas() {
+        window.location = "dash.html"
 
     }
 

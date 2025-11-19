@@ -1,0 +1,96 @@
+*
+{
+    overflow: hidden;
+}
+
+body 
+{
+    background-image: url('../assets/imgs/fundo.jpg');
+}
+
+
+#predio {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 64px;
+    left: 500px;
+    top: 100px;
+    padding: 30px;
+    border: 20px solid #39313d;
+
+    height:  1440px;
+    width: 768px;
+    
+      
+        background-image: url('../assets/tijolos.png');
+        background-size: auto;
+        background-position: initial;
+        background-repeat:repeat;
+    
+    
+}
+
+.janela 
+{
+
+    background-color: rgb(18, 26, 38);
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}
+
+.janela:hover {
+    background-color: #d2a12e;
+    cursor: pointer;
+}
+
+#janelaAcesa 
+{
+    background-color: #d2a12e;
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}
+
+#janela1{
+        background-color: rgb(18, 26, 38);
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}
+#janela2{
+        background-color: rgb(18, 26, 38);
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}
+#janela3{
+        background-color: rgb(18, 26, 38);
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}
+
+#janela1:hover{
+        background-color: rgb(18, 26, 38);
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}
+
+#janela2:hover{
+        background-color: rgb(18, 26, 38);
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}
+
+#janela3:hover{
+        background-color: rgb(18, 26, 38);
+    height: 100px;
+    width: 64px;
+    border: 5px solid brown;
+}

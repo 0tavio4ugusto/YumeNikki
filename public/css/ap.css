@@ -21,6 +21,7 @@
     align-items: center;
     width: 90%;
     height: 90%;
+    aspect-ratio: 4/3;
 }
 
 #bg img{
@@ -30,6 +31,7 @@
     image-rendering: pixelated;
     height: auto;
     width: 80%;
+
 }
 
 .movel 
@@ -98,4 +100,28 @@
     left: 380px;
     top: 380px;
     background-color: transparent;
+}
+
+#tutorial
+{
+
+    position: fixed;
+    top: 250px;
+    left: 250px;
+    background-color: transparent;
+    
+}
+
+#calibrador1
+{
+    
+    border: 10px dashed red;
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    top: 140px;
+    left: 1078px;
+    background-color: transparent;
+
+
 }
