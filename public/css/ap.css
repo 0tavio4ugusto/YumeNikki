@@ -112,6 +112,55 @@
     
 }
 
+#containerDash {
+    display: none;
+
+}
+
+#dashboard
+{
+    border-radius: 5px;
+    border: 6px solid green;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 3;
+    position: fixed;
+    background-color: black;
+    top:40px;
+    left: 100px;
+    width: 1280px;
+    height: 720px;
+}
+
+#grafico
+{
+    
+    height: 100%;
+    width: 70%;
+    background-color: yellow;
+}
+
+#kpis {
+    height: 100%;
+    width: 30%;
+    background-color: blue;
+}
+
+#fechar{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: green;
+    font-size: 20px;
+    font-weight: 900;
+    height: 32px;
+    width: 32px;
+    border-radius: 5px;
+    
+}
+
 #calibrador1
 {
     

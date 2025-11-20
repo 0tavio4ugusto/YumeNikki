@@ -15,5 +15,9 @@ router.post("/inserir", function(req, res) {
     segredosController.inserir(req, res);
 });
 
+router.post("/contar", function(req, res) {
+    segredosController.contar(req, res);
+});
+
 
 module.exports = router;

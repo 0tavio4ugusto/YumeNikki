@@ -1,0 +1,14 @@
+body 
+{
+    background-image: url(../assets/imgs/fundo2.png);
+    animation: moverFundo 60s linear infinite;
+}
+
+@keyframes moverFundo {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 1000px 1000px;
+    }
+}

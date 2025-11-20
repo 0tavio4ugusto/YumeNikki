@@ -39,8 +39,23 @@ function buscar(req, res) {
         });
 }
 
+function contar(req, res) {
+    var idUsuario = req.body.idUsuario;
+
+    segredosModel.contar(idUsuario)
+    .then(function (resultadoContar) {
+        res.json(resultadoContar);
+        console.log(JSON.stringify(resultadoContar));
+        
+
+    }).catch(function (erro) {
+            res.status(500).json(erro);
+        });
+}
+
 module.exports = {
     inserir,
     salvar,
-    buscar
+    buscar,
+    contar
 };

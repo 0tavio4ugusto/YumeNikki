@@ -33,7 +33,7 @@ function inserir(idUsuario, pagina) {
     // a pagina que eu to vira 1
     col[pagina] = 1;
 
-     instrucaoSql = `
+     var instrucaoSql = `
         INSERT INTO segredos (
             idusuario,
             apartamento, 
@@ -58,8 +58,19 @@ function inserir(idUsuario, pagina) {
     return database.executar(instrucaoSql);
 }
 
+function contar(idUsuario) {
+    var instrucaoSql = `
+
+        SELECT * FROM segredos WHERE idusuario = ${idUsuario};
+
+    `
+      console.log("Executando SQL:\n" + instrucaoSql);
+        return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscar,
     salvar,
-    inserir
+    inserir,
+    contar
 };

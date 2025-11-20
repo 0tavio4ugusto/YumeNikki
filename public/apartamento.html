@@ -7,20 +7,39 @@
     <title>APARTAMENTO</title>
     <link rel="stylesheet" href="./css/geral.css">
     <link rel="stylesheet" href="./css/ap.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+
 
     <div id="bg">
         <img src="./assets/apartamento.png" alt="">
     </div>
 
+    <div id="containerDash">
+        <div id="dashboard">
+            <div id="grafico">
+                <div onclick="fecharDash()" id="fechar">X</div>
+            </div>
+            <div id="kpis">
+                <div id="kpi1"></div>
+                <div id="kpi2"></div>
+            </div>
+        </div>
+    </div>
+
     <div id="interativo">
         <div class="movel" id="cama">SONHAR</div>
-        <div class="movel" id="computador">ESTATÍSTICAS</div>
+        <div class="movel" onclick="mostrarDash()" id="computador">ESTATÍSTICAS</div>
         <div class="movel" onclick="sair()" id="porta">SAIR</div>
         <div class="movel" id="segredo" onclick="segredo()"></div>
     </div>
+
 
     <div id="tutorial">
         <div id="calibrador1"></div>
@@ -30,9 +49,59 @@
 
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 
+
+
     tempo = 0
+    segredosPegos = 0
+    dash = document.getElementById("containerDash");
+
+    function mostrarDash() {
+        dash.style.display = 'block';
+        segredosPegos = 0
+
+        fetch("/segredos/contar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("SELECT recebido:");
+                console.log(data);
+
+                row = data[0];
+                encontrados = [];
+
+                for (let key in row) {
+                    if (key !== "idusuario" && key !== "idsegredo") {
+                        encontrados.push(row[key]);
+                    }
+                }
+
+                console.log(encontrados);
+
+                for (let index = 0; index < encontrados.length; index++) {
+                    if (encontrados[index] == 1) {
+                        segredosPegos++
+                        
+                    }
+                    
+                }
+            })
+            .catch(err => console.log("Erro no SELECT:", err));
+    }
+
+    function fecharDash() {
+        dash.style.display = 'none';
+
+    }
 
     fetch("/usuarios/checar", {
         method: "POST",
@@ -66,7 +135,7 @@
                 }).then(res => res.json())
                     .then(r => {
                         console.log("Primeiro registro inserido:", r);
-                    
+
                     })
                     .catch(err => console.log("Erro ao registrar tempo:", err));
 
@@ -105,7 +174,6 @@
         .catch(err => {
             console.log("Erro na requisição:", err);
         });
-
 
 
     function segredo() {
@@ -160,7 +228,7 @@
                 console.log("Inserido com sucesso:", data);
                 alert("Você encontrou o segredo do apartamento!")
                 setTimeout(() => {
-                    location.reload()                    
+                    location.reload()
                 }, 2000);
 
             })
@@ -192,17 +260,17 @@
 
     }
 
-        function sair() {
+    function sair() {
         window.location = "index.html"
 
     }
 
-        function sonhar() {
+    function sonhar() {
         window.location = "nexus.html"
-        
+
     }
 
-        function estatisticas() {
+    function estatisticas() {
         window.location = "dash.html"
 
     }
