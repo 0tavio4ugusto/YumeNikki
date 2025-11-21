@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/aps.css">
+</head>
+
+<body>
+
+    <div id="predio">
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+        <div class="janela"></div>
+        <div class="janela"></div>
+        <div class="janela"></div>
+
+    </div>
+
+</body>
+
+<script>
+
+    tempo = 0
+    idPagina = 1
+
+        fetch("/usuarios/checar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuario: sessionStorage.ID_USUARIO,
+            idPagina: idPagina,
+            tempoAntigo: sessionStorage.TEMPO_ANTIGO
+        })
+    })
+        .then(res => res.json())
+        .then(lista => {
+            if (lista.length === 0) {
+
+                console.log("Primeira vez acessando a página.")
+                fetch("usuarios/somar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        idUsuario: sessionStorage.ID_USUARIO,
+                        tempoAntigo: lista.tempoAntigo,
+                        tempo: 0,
+                        idPagina: idPagina,
+                        lista: lista.length
+                    })
+
+
+                }).then(res => res.json())
+                    .then(r => {
+                        console.log("Primeiro registro inserido:", r);
+
+                    })
+                    .catch(err => console.log("Erro ao registrar tempo:", err));
+
+            } else {
+                var tempoBanco = Number(lista[0].tempo);
+                console.log("Já acessou antes.");
+
+                setInterval(() => {
+                    tempo++;
+                    console.log("tempo:", (tempoBanco + tempo));
+                }, 1000);
+
+                setInterval(() => {
+                    fetch("usuarios/somar", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            idUsuario: sessionStorage.ID_USUARIO,
+                            tempoAntigo: tempoBanco,
+                            tempo: tempoBanco + tempo,
+                            idPagina: idPagina,
+                            lista: lista.length
+                        })
+
+
+                    }).then(res => res.json())
+                        .then(r => {
+                            console.log("Primeiro registro inserido:", r);
+                        })
+                        .catch(err => console.log("Erro ao registrar tempo:", err));
+                }, 4000);
+            }
+        })
+        .catch(err => {
+            console.log("Erro na requisição:", err);
+        });
+
+        function segredo() {
+
+        fetch("/segredos/buscar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                pagina: `predio`,
+            })
+        }).then(res => {
+            if (!res.ok) {
+                throw new Error("Erro ao na busca");
+            }
+            return res.json();
+        })
+            .then(dados => {
+                console.log("Resultado da busca:", dados);
+
+                if (dados.length === 0) {
+                    console.log("INSERT");
+                    insert()
+
+                } else {
+                    console.log("UPDATE");
+                    update()
+
+                }
+            })
+            .catch(err => {
+                console.error("Erro:", err);
+            });
+    }
+
+    function insert() {
+
+        fetch("/segredos/inserir", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                pagina: "Predio"
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Inserido com sucesso:", data);
+                alert("Você encontrou o segredo do Predio!")
+                setTimeout(() => {
+                    location.reload()
+                }, 2000);
+
+            })
+            .catch(err => console.log("Erro no INSERT:", err));
+
+    }
+
+        function update() {
+
+        fetch("/segredos/salvar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                pagina: "predio"
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Att com sucesso:", data);
+                alert("Voce ja encontrou esse segredo!")
+                location.reload()
+
+            })
+            .catch(err => console.log("Erro no INSERT:", err));
+
+
+    }
+
+
+    janelas = document.getElementsByClassName("janela");
+
+    for (let i = 0; i < janelas.length; i++) {
+        janelas[i].onclick = function () {
+            if (this.id === "janelaAcesa") {
+                this.id = ""; 
+            } else {
+                this.id = "janelaAcesa";
+            }
+        }
+    }
+
+</script>
+
+
+</html>

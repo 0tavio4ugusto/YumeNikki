@@ -2,6 +2,36 @@ body
 {
     background-image: url(../assets/imgs/fundo2.png);
     animation: moverFundo 60s linear infinite;
+
+
+
+}
+
+.porta {
+    image-rendering: pixelated;
+    height: 100px;
+    width: auto;
+}
+
+#container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#sonhos
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    height: 70%;
+    width: 60%;
+    background-color: black;
+
 }
 
 @keyframes moverFundo {
@@ -12,3 +42,5 @@ body
         background-position: 1000px 1000px;
     }
 }
+
+

@@ -24,7 +24,8 @@
     <div id="containerDash">
         <div id="dashboard">
             <div id="grafico">
-                <div onclick="fecharDash()" id="fechar">X</div>
+                <div onclick="fecharDash()" id="fechar">FECHAR</div>
+                <canvas id="graficoCanvas"></canvas>
             </div>
             <div id="kpis">
                 <div id="kpi1"></div>
@@ -34,8 +35,8 @@
     </div>
 
     <div id="interativo">
-        <div class="movel" id="cama">SONHAR</div>
-        <div class="movel" onclick="mostrarDash()" id="computador">ESTATÍSTICAS</div>
+        <div class="movel" onclick="sonhar()" id="cama">SONHAR</div>
+        <div class="movel" onclick="mostrarDash(), obterDadosGrafico()" id="computador">ESTATÍSTICAS</div>
         <div class="movel" onclick="sair()" id="porta">SAIR</div>
         <div class="movel" id="segredo" onclick="segredo()"></div>
     </div>
@@ -55,9 +56,17 @@
 
 
     tempo = 0
+    idPagina = 0
     segredosPegos = 0
     dash = document.getElementById("containerDash");
 
+    const paginas = [
+        { idpagina: 0, nome: "Apartamento" },
+        { idpagina: 1, nome: "Predio" },
+        { idpagina: 2, nome: "Biblioteca" },
+        { idpagina: 3, nome: "Engrenagens" },
+        { idpagina: 4, nome: "Floresta" }
+    ];
     function mostrarDash() {
         dash.style.display = 'block';
         segredosPegos = 0
@@ -86,13 +95,16 @@
                 }
 
                 console.log(encontrados);
+                kpi1 = document.getElementById("kpi1");
 
                 for (let index = 0; index < encontrados.length; index++) {
                     if (encontrados[index] == 1) {
                         segredosPegos++
-                        
+
                     }
-                    
+
+                    kpi1.innerHTML = `${segredosPegos}/5`
+
                 }
             })
             .catch(err => console.log("Erro no SELECT:", err));
@@ -110,6 +122,7 @@
         },
         body: JSON.stringify({
             idUsuario: sessionStorage.ID_USUARIO,
+            idPagina: idPagina,
             tempoAntigo: sessionStorage.TEMPO_ANTIGO
         })
     })
@@ -270,10 +283,88 @@
 
     }
 
-    function estatisticas() {
-        window.location = "dash.html"
+    function obterDadosGrafico() {
+        fetch("/usuarios/contabilizarTempo", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idUsuario: sessionStorage.ID_USUARIO })
+        })
+            .then(res => res.json())
+            .then(dados => {
 
+                console.log("Dados brutos:", dados);
+
+                var labels = [];
+                var tempos = [];
+
+                for (var i = 0; i < dados.length; i++) {
+                    const paginaInfo = paginas.find(p => p.idpagina == dados[i].idpagina);
+                    labels.push(paginaInfo.nome);
+                    tempos.push(Number(dados[i].tempo));
+                }
+
+
+                var tempoTotal = 0;
+                for (var i = 0; i < tempos.length; i++) {
+                    tempoTotal += tempos[i];
+                }
+
+                var porcentagens = [];
+
+                for (var i = 0; i < tempos.length; i++) {
+                    if (tempoTotal === 0) {
+                        porcentagens.push(0);
+                    } else {
+                        porcentagens.push((tempos[i] / tempoTotal) * 100);
+                    }
+                }
+
+                plotarGrafico(labels, porcentagens);
+            })
+            .catch(err => console.error("Erro:", err));
     }
+
+
+    let grafico = null;
+
+    function plotarGrafico(labels, valores) {
+
+        if (grafico !== null) {
+            grafico.destroy();
+        }
+
+        grafico = new Chart(document.getElementById("graficoCanvas"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Tempo gasto (%)",
+                    data: valores,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    }
+
+
+
+    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // buscando a última medida inserida em tabela contendo as capturas,
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+
+
+
+
 
 </script>
 

@@ -2,7 +2,7 @@ var usuarioModel = require("../models/usuarioModel");
 
 
 function autenticar(req, res) {
-    
+
     var nick = req.body.nickServer;
     var senha = req.body.senhaServer;
 
@@ -10,7 +10,7 @@ function autenticar(req, res) {
         res.status(400).send("Seu nick está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
-    }else{
+    } else {
 
         usuarioModel.autenticar(nick, senha)
             .then(function (resultadoAutenticar) {
@@ -39,28 +39,41 @@ function autenticar(req, res) {
 
 }
 
-function checar(req,res) {
-    
+function checar(req, res) {
+
+    var idUsuario = req.body.idUsuario;
+    var idPagina = req.body.idPagina;
+
+    usuarioModel.checar(idUsuario, idPagina)
+        .then(function (resultadoChecar) {
+            console.log(`\nResultados encontrados: ${resultadoChecar.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultadoChecar)}`);
+            res.json(resultadoChecar)
+        })
+        .catch(function (erro) {
+            console.log(erro)
+            console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        })
+
+
+
+}
+
+
+function contabilizarTempo(req, res) {
     var idUsuario = req.body.idUsuario;
 
-        usuarioModel.checar(idUsuario)
-            .then(function(resultadoChecar){
-                console.log(`\nResultados encontrados: ${resultadoChecar.length}`);
-                console.log(`Resultados: ${JSON.stringify(resultadoChecar)}`);
-                res.json(resultadoChecar)
-            })
-            .catch(function(erro) {
-                console.log(erro)
-                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            } ) 
-    
-
-    
+    usuarioModel.contabilizarTempo(idUsuario)
+        .then(resultado => res.json(resultado))
+        .catch(erro => {
+            console.log("Erro:", erro);
+            res.status(500).json(erro);
+        });
 }
 
 function somar(req, res) {
-    
+
     var tempo = req.body.tempo;
     var idUsuario = req.body.idUsuario;
     var idPagina = req.body.idPagina;
@@ -72,19 +85,19 @@ function somar(req, res) {
             .then(function (resultado) {
                 res.json(resultado)
             }).catch(function (erro) {
-            console.log("Erro ao contar:", erro);
-            res.status(500).json(erro.sqlMessage);
-        });
-        
+                console.log("Erro ao contar:", erro);
+                res.status(500).json(erro.sqlMessage);
+            });
+
     } else
-    usuarioModel.somar(tempo, idUsuario, idPagina)
-        .then(function (resultado) {
-            res.json(resultado);
-        })
-        .catch(function (erro) {
-            console.log("Erro ao somar:", erro);
-            res.status(500).json(erro.sqlMessage);
-        });
+        usuarioModel.somar(tempo, idUsuario, idPagina)
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log("Erro ao somar:", erro);
+                res.status(500).json(erro.sqlMessage);
+            });
 }
 
 function cadastrar(req, res) {
@@ -128,5 +141,6 @@ module.exports = {
     autenticar,
     cadastrar,
     checar,
-    somar
+    somar,
+    contabilizarTempo
 }

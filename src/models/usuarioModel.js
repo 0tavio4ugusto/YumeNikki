@@ -1,9 +1,10 @@
+const { contabilizar } = require("../controllers/usuarioController");
 var database = require("../database/config")
 
 function autenticar(nick, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", nick, senha)
     var instrucaoSql = `
-        SELECT u.idusuario, u.nome, u.email, u.senha, u.nick, t.tempo FROM usuarios u LEFT JOIN tempo t ON u.idusuario = t.idusuario WHERE nick = '${nick}' AND senha = '${senha}';
+        SELECT * FROM usuarios WHERE nick = '${nick}' AND senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -12,7 +13,7 @@ function autenticar(nick, senha) {
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, email, senha, nick) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, nick);
-    
+
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
@@ -22,10 +23,10 @@ function cadastrar(nome, email, senha, nick) {
     return database.executar(instrucaoSql);
 }
 
-function checar(idUsuario) {
+function checar(idUsuario, idPagina) {
     var instrucaoSql = `
-    SELECT * FROM tempo WHERE idusuario = '${idUsuario}'`
-    
+    SELECT * FROM tempo WHERE idusuario = '${idUsuario}' AND idpagina = '${idPagina}'`
+
     console.log("aaaExecutando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 
@@ -33,25 +34,34 @@ function checar(idUsuario) {
 
 function contar(tempo, idUsuario, idPagina) {
 
-        var instrucaoSql = `
+    var instrucaoSql = `
         UPDATE tempo SET tempo = '${tempo}' WHERE idusuario = ${idUsuario} AND idpagina = ${idPagina};`
-        return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql);
 
-    
+
 }
 
 function somar(tempo, idUsuario, idPagina) {
-        var instrucaoSql = `
+    var instrucaoSql = `
         INSERT INTO tempo (idtempo, tempo, idusuario, idpagina) VALUES (DEFAULT, '${tempo}', '${idUsuario}', '${idPagina}')`
-        return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql);
 
-    
+
 }
+function contabilizarTempo(idUsuario) {
+    var instrucaoSql = `
+        SELECT * FROM tempo WHERE idusuario = ${idUsuario};
+    `;
+    console.log("aaaExecutando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
     autenticar,
     cadastrar,
     checar,
     contar,
-    somar
+    somar,
+    contabilizarTempo
 };

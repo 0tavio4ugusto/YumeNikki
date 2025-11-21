@@ -19,6 +19,12 @@ router.post("/somar", function (req, res) {
     usuarioController.somar(req, res);
 });
 
+router.post("/contabilizarTempo", function (req, res) {
+    usuarioController.contabilizarTempo(req, res);
+});
+
+
+
 
 
 module.exports = router;
