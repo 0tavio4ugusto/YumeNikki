@@ -141,7 +141,7 @@
     align-items: center;
     height: 100%;
     width: 70%;
-    background-color: yellow;
+    
 }
 
 #kpis {
@@ -167,6 +167,15 @@
     border-radius: 20px;
     font-family: 'Press Start 2P', cursive;
 }
+
+#filtro{
+    position: absolute;
+    z-index: 2;
+    top: 1000px;
+    height: 1280;
+    width:720;
+}
+
 
 #kpi2{
     display: flex;

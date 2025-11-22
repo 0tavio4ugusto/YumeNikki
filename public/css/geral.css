@@ -20,8 +20,6 @@
 
 */
 
-/* Imagem do fundo */
-
 #background 
 {
     position: fixed;
@@ -35,7 +33,29 @@
 
 }
 
-/* Filtro escuro no fundo */
+
+
+#acordar {
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+    color: wheat;
+    background-color: #2B1016;
+}
+
+#acordar:hover {
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    color: wheat;
+    background-color: #36141b;
+}
+
 
 #bgOverlay 
 {

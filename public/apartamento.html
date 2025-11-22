@@ -32,6 +32,10 @@
                 <div id="kpi2"></div>
             </div>
         </div>
+        
+        <img id="filtro" src="./assets/imgs/filtro.jpg" alt="">
+        
+
     </div>
 
     <div id="interativo">
@@ -148,6 +152,7 @@
                 }).then(res => res.json())
                     .then(r => {
                         console.log("Primeiro registro inserido:", r);
+                        window.location.reload()
 
                     })
                     .catch(err => console.log("Erro ao registrar tempo:", err));
@@ -340,7 +345,11 @@
                 datasets: [{
                     label: "Tempo gasto (%)",
                     data: valores,
-                    borderWidth: 2
+                    borderWidth: 2,
+                    borderColor: '#007A00',
+                    backgroundColor: '#007A00',
+                    color: '#007A00'
+
                 }]
             },
             options: {
@@ -349,7 +358,9 @@
                         beginAtZero: true,
                         max: 100
                     }
+                    
                 }
+            
             }
         });
     }

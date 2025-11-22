@@ -11,6 +11,7 @@ body
     image-rendering: pixelated;
     height: 100px;
     width: auto;
+    cursor: pointer;
 }
 
 #container {
@@ -30,9 +31,13 @@ body
     gap: 80px;
     height: 70%;
     width: 60%;
-    background-color: black;
 
 }
+
+.porta:hover {
+    height: 115px ;
+}
+
 
 @keyframes moverFundo {
     from {

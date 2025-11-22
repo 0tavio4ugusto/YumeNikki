@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/geral.css">
+    <link rel="stylesheet" href="./css/livraria.css">
+</head>
+
+<body>
+    <button onclick="acordar()" class="bordaPixel" id="acordar" type="button">ACORDAR</button>
+
+    <div id="fundo">
+        <img src="./assets/imgs/livraria.png" alt="">
+    </div>
+
+    <div onclick="fechar()" id="resultado">a</div>
+
+
+    
+</body>
+
+<script>
+    livroAtual = document.getElementById("resultado");
+
+    function fechar() {
+        livroAtual.style.display = 'none'
+
+        
+    }
+
+    function acordar() {
+        window.location = 'apartamento.html'
+        
+    }
+</script>
+
+</html>

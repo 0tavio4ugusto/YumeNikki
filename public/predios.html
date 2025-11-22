@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/aps.css">
+    <link rel="stylesheet" href="css/geral.css">
 </head>
 
 <body>
+    <button onclick="acordar()" class="bordaPixel" id="acordar" type="button">ACORDAR</button>
+
 
     <div id="predio">
 
@@ -66,10 +69,12 @@
 
 <script>
 
+
+
     tempo = 0
     idPagina = 1
 
-        fetch("/usuarios/checar", {
+    fetch("/usuarios/checar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -102,6 +107,8 @@
                 }).then(res => res.json())
                     .then(r => {
                         console.log("Primeiro registro inserido:", r);
+                            window.location.reload()
+
 
                     })
                     .catch(err => console.log("Erro ao registrar tempo:", err));
@@ -133,6 +140,7 @@
                     }).then(res => res.json())
                         .then(r => {
                             console.log("Primeiro registro inserido:", r);
+
                         })
                         .catch(err => console.log("Erro ao registrar tempo:", err));
                 }, 4000);
@@ -142,7 +150,7 @@
             console.log("Erro na requisição:", err);
         });
 
-        function segredo() {
+    function segredo() {
 
         fetch("/segredos/buscar", {
             method: "POST",
@@ -177,6 +185,11 @@
             });
     }
 
+    function acordar() {
+        window.location = 'apartamento.html'
+
+    }
+
     function insert() {
 
         fetch("/segredos/inserir", {
@@ -202,7 +215,7 @@
 
     }
 
-        function update() {
+    function update() {
 
         fetch("/segredos/salvar", {
             method: "POST",
@@ -232,7 +245,7 @@
     for (let i = 0; i < janelas.length; i++) {
         janelas[i].onclick = function () {
             if (this.id === "janelaAcesa") {
-                this.id = ""; 
+                this.id = "";
             } else {
                 this.id = "janelaAcesa";
             }
