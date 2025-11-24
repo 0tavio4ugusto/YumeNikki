@@ -83,8 +83,11 @@
 </body>
 
 <script>
+
+    tempo = 0
+    idPagina = 2
     livroAtual = document.getElementById("resultado");
-    imagemAtual = documentgetElementById("desenho")
+    imagemAtual = document.getElementById("desenho")
 
     function fechar() {
 
@@ -163,12 +166,21 @@
         livroAtual.style.display = 'block'
     }
     function livroG() {
-        desenho.src = './assets/livraria/livrariaDesenhos/17.png'
+        desenho.src = './assets/livraria/livrariaDesenhos/17.jpeg'
         livroAtual.style.display = 'block'
     }
-    function livroH() { }
-    function livroI() { }
-    function livroJ() { }
+    function livroH() {
+                desenho.src = './assets/livraria/livrariaDesenhos/18.jpeg'
+        livroAtual.style.display = 'block'
+     }
+    function livroI() {
+                desenho.src = './assets/livraria/livrariaDesenhos/19.jpeg'
+        livroAtual.style.display = 'block'
+     }
+    function livroJ() {
+                desenho.src = './assets/livraria/livrariaDesenhos/20.jpeg'
+        livroAtual.style.display = 'block'
+     }
     function livroK() { }
     function livroL() { }
     function livroM() { }
@@ -180,6 +192,84 @@
     function livroS() { }
     function livroT() { }
     function livroU() { }
+
+
+    fetch("/usuarios/checar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            idUsuario: sessionStorage.ID_USUARIO,
+            idPagina: idPagina,
+            tempoAntigo: sessionStorage.TEMPO_ANTIGO
+        })
+    })
+        .then(res => res.json())
+        .then(lista => {
+            if (lista.length === 0) {
+
+                console.log("Primeira vez acessando a página.")
+                fetch("usuarios/somar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        idUsuario: sessionStorage.ID_USUARIO,
+                        tempoAntigo: lista.tempoAntigo,
+                        tempo: 0,
+                        idPagina: idPagina,
+                        lista: lista.length
+                    })
+
+
+                }).then(res => res.json())
+                    .then(r => {
+                        console.log("Primeiro registro inserido:", r);
+                        window.location.reload()
+
+                    })
+                    .catch(err => console.log("Erro ao registrar tempo:", err));
+
+            } else {
+                var tempoBanco = Number(lista[0].tempo);
+                console.log("Já acessou antes.");
+
+                setInterval(() => {
+                    tempo++;
+                    console.log("tempo:", (tempoBanco + tempo));
+                }, 1000);
+
+                setInterval(() => {
+                    fetch("usuarios/somar", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            idUsuario: sessionStorage.ID_USUARIO,
+                            tempoAntigo: tempoBanco,
+                            tempo: tempoBanco + tempo,
+                            idPagina: idPagina,
+                            lista: lista.length
+                        })
+
+
+                    }).then(res => res.json())
+                        .then(r => {
+                            console.log("Primeiro registro inserido:", r);
+                        })
+                        .catch(err => console.log("Erro ao registrar tempo:", err));
+                }, 4000);
+            }
+        })
+        .catch(err => {
+            console.log("Erro na requisição:", err);
+        });
+
+
+
 
 
 </script>
