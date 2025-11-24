@@ -15,7 +15,7 @@
 
     <div id="predio">
 
-        <div class="janela"></div>
+        <div class="janela" onclick=""></div>
         <div class="janela"></div>
         <div class="janela"></div>
         <div class="janela"></div>
@@ -70,6 +70,46 @@
 <script>
 
 
+    janelasEspecificas = [1, 6, 7, 8, 11, 12, 13, 15, 16, 18, 19, 24];
+
+
+    estadoJanelas = [0,0,0,0,0,0,0,0,0,0,0,0]
+
+    const janelas = document.getElementsByClassName("janela");
+
+    for (let i = 0; i < janelas.length; i++) {
+        janelas[i].onclick = function () {
+
+            // alterna o acender
+            if (this.id === "janelaAcesa") {
+                this.id = "";
+            } else {
+                this.id = "janelaAcesa";
+            }
+            const pos = janelasEspecificas.indexOf(i + 1);
+
+            if (pos !== -1) {
+                if (this.id === "janelaAcesa") {
+                    estadoJanelas[pos] = 1;
+                } else {
+                    estadoJanelas[pos] = 0;
+                }
+            }
+            soma = 0
+            for (let i = 0; i < estadoJanelas.length; i++) {
+                soma += Number(estadoJanelas[i])
+            }
+
+            if (soma === janelasEspecificas.length) {
+                segredo();
+            }
+
+            console.log("liguei" + soma);
+            
+        };
+    }
+
+
 
     tempo = 0
     idPagina = 1
@@ -107,7 +147,7 @@
                 }).then(res => res.json())
                     .then(r => {
                         console.log("Primeiro registro inserido:", r);
-                            window.location.reload()
+                        window.location.reload()
 
 
                     })
@@ -159,7 +199,7 @@
             },
             body: JSON.stringify({
                 idUsuario: sessionStorage.ID_USUARIO,
-                pagina: `predio`,
+                pagina: `apartamentos`,
             })
         }).then(res => {
             if (!res.ok) {
@@ -199,7 +239,7 @@
             },
             body: JSON.stringify({
                 idUsuario: sessionStorage.ID_USUARIO,
-                pagina: "Predio"
+                pagina: "apartamentos"
             })
         })
             .then(res => res.json())
@@ -207,7 +247,7 @@
                 console.log("Inserido com sucesso:", data);
                 alert("Você encontrou o segredo do Predio!")
                 setTimeout(() => {
-                    location.reload()
+                    window.location = 'apartamento.html'
                 }, 2000);
 
             })
@@ -224,32 +264,19 @@
             },
             body: JSON.stringify({
                 idUsuario: sessionStorage.ID_USUARIO,
-                pagina: "predio"
+                pagina: "apartamentos"
             })
         })
             .then(res => res.json())
             .then(data => {
                 console.log("Att com sucesso:", data);
                 alert("Voce ja encontrou esse segredo!")
-                location.reload()
+                window.location = 'apartamento.html'
 
             })
             .catch(err => console.log("Erro no INSERT:", err));
 
 
-    }
-
-
-    janelas = document.getElementsByClassName("janela");
-
-    for (let i = 0; i < janelas.length; i++) {
-        janelas[i].onclick = function () {
-            if (this.id === "janelaAcesa") {
-                this.id = "";
-            } else {
-                this.id = "janelaAcesa";
-            }
-        }
     }
 
 </script>

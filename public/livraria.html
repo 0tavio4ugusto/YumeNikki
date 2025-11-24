@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,25 +16,172 @@
         <img src="./assets/imgs/livraria.png" alt="">
     </div>
 
-    <div onclick="fechar()" id="resultado">a</div>
+
+    <div id="containerLivros">
+        <div id="linha">
+            <div class="estante" id="estante1">
+                <div class="livro" id="livro1" onclick="livro1()"></div>
+                <div class="livro" id="livro2" onclick="livro2()"></div>
+                <div class="livro" id="livro3" onclick="livro3()"></div>
+                <div class="livro" id="livro4" onclick="livro4()"></div>
+                <div class="livro" id="livro5" onclick="livro5()"></div>
+            </div>
+
+            <div class="estante" id="estante2">
+                <div class="livro" id="livro6" onclick="livro6()"></div>
+                <div class="livro" id="livro7" onclick="livro7()"></div>
+                <div class="livro" id="livro8" onclick="livro8()"></div>
+                <div class="livro" id="livro9" onclick="livro9()"></div>
+                <div class="livro" id="livroa" onclick="livroA()"></div>
+            </div>
+        </div>
+
+        <div id="linha">
+            <div class="estante" id="estante3">
+                <div class="livro" id="livrob" onclick="livroB()"></div>
+                <div class="livro" id="livroc" onclick="livroC()"></div>
+                <div class="livro" id="livrod" onclick="livroD()"></div>
+                <div class="livro" id="livroe" onclick="livroE()"></div>
+                <div class="livro" id="livrof" onclick="livroF()"></div>
+            </div>
+
+            <div class="estante" id="estante4">
+                <div class="livro" id="livrog" onclick="livroG()"></div>
+                <div class="livro" id="livroh" onclick="livroH()"></div>
+                <div class="livro" id="livroi" onclick="livroI()"></div>
+                <div class="livro" id="livroj" onclick="livroJ()"></div>
+                <div class="livro" id="livrok" onclick="livroK()"></div>
+            </div>
+        </div>
+
+        <div id="linha">
+            <div class="estante" id="estante5">
+                <div class="livro" id="livrol" onclick="livroL()"></div>
+                <div class="livro" id="livrom" onclick="livroM()"></div>
+                <div class="livro" id="livron" onclick="livroN()"></div>
+                <div class="livro" id="livroo" onclick="livroO()"></div>
+                <div class="livro" id="livrop" onclick="livroP()"></div>
+            </div>
+
+            <div class="estante" id="estante6">
+                <div class="livro" id="livroq" onclick="livroQ()"></div>
+                <div class="livro" id="livror" onclick="livroR()"></div>
+                <div class="livro" id="livros" onclick="livroS()"></div>
+                <div class="livro" id="livrot" onclick="livroT()"></div>
+                <div class="livro" id="livrou" onclick="livroU()"></div>
+            </div>
+        </div>
+    </div>
 
 
-    
+    <div onclick="fechar()" id="resultado">
+        <div id="containerImg">
+            <img id="desenho" src="" alt="">
+        </div>
+    </div>
+
 </body>
 
 <script>
     livroAtual = document.getElementById("resultado");
+    imagemAtual = documentgetElementById("desenho")
 
     function fechar() {
+
         livroAtual.style.display = 'none'
 
-        
     }
 
     function acordar() {
         window.location = 'apartamento.html'
-        
+
     }
+
+
+    function livro1() {
+        desenho.src = './assets/livraria/livrariaDesenhos/1.jpeg'
+        livroAtual.style.display = 'block'
+
+    }
+    function livro2() {
+        desenho.src = './assets/livraria/livrariaDesenhos/2.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livro3() {
+
+        desenho.src = './assets/livraria/livrariaDesenhos/3.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livro4() {
+        desenho.src = './assets/livraria/livrariaDesenhos/4.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livro5() {
+        desenho.src = './assets/livraria/livrariaDesenhos/5.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livro6() {
+        desenho.src = './assets/livraria/livrariaDesenhos/6.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livro7() {
+        desenho.src = './assets/livraria/livrariaDesenhos/7.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livro8() {
+        desenho.src = './assets/livraria/livrariaDesenhos/8.jpg'
+        livroAtual.style.display = 'block'
+    }
+    function livro9() {
+        desenho.src = './assets/livraria/livrariaDesenhos/9.png'
+        livroAtual.style.display = 'block'
+    }
+
+    function livroA() {
+        desenho.src = './assets/livraria/livrariaDesenhos/10.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livroB() {
+        desenho.src = './assets/livraria/livrariaDesenhos/11.jpeg'
+        livroAtual.style.display = 'block'
+    }
+    function livroC() {
+        desenho.src = './assets/livraria/livrariaDesenhos/13.png'
+        livroAtual.style.display = 'block'
+    }
+    function livroD() {
+        desenho.src = './assets/livraria/livrariaDesenhos/14.png'
+        livroAtual.style.display = 'block'
+
+    }
+    function livroE() {
+        desenho.src = './assets/livraria/livrariaDesenhos/15.png'
+        livroAtual.style.display = 'block'
+    }
+    function livroF() {
+        desenho.src = './assets/livraria/livrariaDesenhos/16.png'
+        livroAtual.style.display = 'block'
+    }
+    function livroG() {
+        desenho.src = './assets/livraria/livrariaDesenhos/17.png'
+        livroAtual.style.display = 'block'
+    }
+    function livroH() { }
+    function livroI() { }
+    function livroJ() { }
+    function livroK() { }
+    function livroL() { }
+    function livroM() { }
+    function livroN() { }
+    function livroO() { }
+    function livroP() { }
+    function livroQ() { }
+    function livroR() { }
+    function livroS() { }
+    function livroT() { }
+    function livroU() { }
+
+
 </script>
 
 </html>

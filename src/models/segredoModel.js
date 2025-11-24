@@ -1,8 +1,8 @@
 var database = require("../database/config");
 
-function buscar(idUsuario) {
+function buscar(idUsuario, pagina) {
     var instrucaoSql = `
-        SELECT * FROM segredos WHERE idusuario = ${idUsuario};
+        SELECT * FROM segredos WHERE idusuario = ${idUsuario} and ${pagina} = 0;
     `;
     console.log("Executando SQL:\n" + instrucaoSql);
     return database.executar(instrucaoSql);

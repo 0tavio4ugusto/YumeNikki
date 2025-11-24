@@ -29,8 +29,9 @@ function salvar(req, res) {
 
 function buscar(req, res) {
     var idUsuario = req.body.idUsuario;
+    var pagina = req.body.pagina
 
-    segredosModel.buscar(idUsuario)
+    segredosModel.buscar(idUsuario, pagina)
         .then(function (resultado) {
             res.json(resultado);
         })
