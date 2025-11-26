@@ -23,6 +23,10 @@ router.post("/contabilizarTempo", function (req, res) {
     usuarioController.contabilizarTempo(req, res);
 });
 
+router.post("/chamarRanking", function(req, res) {
+    usuarioController.chamarRanking(req, res);
+});
+
 
 
 

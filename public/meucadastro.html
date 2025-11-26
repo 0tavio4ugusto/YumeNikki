@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realidade - Cadastro </title>
-    <link rel="stylesheet" href="./css/cadastroLogin.css">
-    <link rel="stylesheet" href="./css/geral.css">
-    <script src="./js/sessao.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Realidade - Cadastro </title>
+  <link rel="stylesheet" href="./css/cadastroLogin.css">
+  <link rel="stylesheet" href="./css/geral.css">
+  <script src="./js/sessao.js"></script>
 
 </head>
+
 <body>
 
-    <div id="background"></div>
-    <div id="bgOverlay"></div>
+  <div id="background"></div>
+  <div id="bgOverlay"></div>
 
-    <div id="main">
-        <div id="container" class="bordaPixel">
-            <h2 class="gradienteTexto negrito titulos" style="padding-top: 20px;">CADASTRO</h2>
-            <div id="inputFolder">
+  <div id="main">
+    <div id="container" class="bordaPixel">
+      <h2 class="gradienteTexto negrito titulos" style="padding-top: 20px;">CADASTRO</h2>
+      <div id="inputFolder">
 
-                <div id="lableGroup">
-                    <h5 class="gradienteTexto">NICKNAME</h5>
-                    <h5 class="gradienteTexto">PRIMEIRO NOME</5>
-                    <h5 class="gradienteTexto">EMAIL</h5>
-                    <h5 class="gradienteTexto">SENHA</h5>
-                    <h5 class="gradienteTexto">CONFIRMAR SENHA</h5> 
-                </div>
-
-                <div id="inputGroup">
-                
-                <input type="text" class="bordaPixel" id="iptNick" placeholder="Nickname">
-                <input type="text" class="bordaPixel" id="iptNome" placeholder="Primeiro Nome">
-                <input type="text" class="bordaPixel" id="iptEmail" placeholder="Email">
-                <input type="password" class="bordaPixel" id="iptSenha" placeholder="Senha">
-                <input type="password" class="bordaPixel" id="iptConfSenha" placeholder="Confirme a senha">
-
-            </div>
-
-            </div>
-
-            <div id="divErr">
-
-            </div>
-
-            
-            <button id="btCadastro" class="bordaPixel" onclick="cadastrar()">Cadastrar</button>
+        <div id="lableGroup">
+          <h5 class="gradienteTexto">NICKNAME</h5>
+          <h5 class="gradienteTexto">PRIMEIRO NOME</5>
+            <h5 class="gradienteTexto">EMAIL</h5>
+            <h5 class="gradienteTexto">SENHA</h5>
+            <h5 class="gradienteTexto">CONFIRMAR SENHA</h5>
         </div>
+
+        <div id="inputGroup">
+
+          <input type="text" class="bordaPixel" id="iptNick" placeholder="Nickname">
+          <input type="text" class="bordaPixel" id="iptNome" placeholder="Primeiro Nome">
+          <input type="text" class="bordaPixel" id="iptEmail" placeholder="Email">
+          <input type="password" class="bordaPixel" id="iptSenha" placeholder="Senha">
+          <input type="password" class="bordaPixel" id="iptConfSenha" placeholder="Confirme a senha">
+
+        </div>
+
+      </div>
+
+      <div id="divErr">
+
+      </div>
+
+
+      <button id="btCadastro" class="bordaPixel" onclick="cadastrar()">Cadastrar</button>
     </div>
-    
+  </div>
+
 </body>
 <script>
 
-    function cadastrar() {
+  function cadastrar() {
 
     nickVar = iptNick.value
     nomeVar = iptNome.value
@@ -59,36 +61,59 @@
     senhaVar = iptSenha.value
     confSenhaVar = iptConfSenha.value
 
+    emailValido = false
+    senhaValida = false
+    confirmarSenha = false
+
+    if (emailVar.includes("@") && emailVar.includes(".")) {
+      emailValido = true
+    }
+
+    if (senhaVar.length >= 8) {
+      senhaValida = true
+    }
+
+    if (senhaVar == confSenhaVar) {
+      confirmarSenha = true
+
+    }
     //Validar os campos em branco
 
     if (
-        nickVar == "" ||
-        nomeVar == "" ||
-        senhaVar == "" ||
-        emailVar == "" ||
-        confSenhaVar == "" 
-    ) {alert('Confira se todos os campos foram preenchidos')} 
-    else { alert("Realizando a tentativa de cadastro...") }
+      nickVar == "" ||
+      nomeVar == "" ||
+      senhaVar == "" ||
+      emailVar == "" ||
+      confSenhaVar == ""
+    ) { alert('Confira se todos os campos foram preenchidos') }
+    else {
 
-        // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nickServer: nickVar,
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-      })
-    }).then(function (res) {
+      if (emailValido == false || senhaValida == false || confirmarSenha == false) {
+
+        alert("Favor inserir um email valido (contendo @ e .) / Confira se a senha possui 8 ou mais caracteres / Confira se as senhas são iguais")
+
+      } else {
+        alert("Realizando a tentativa de cadastro...")
+
+      // Enviando o valor da nova input
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nickServer: nickVar,
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+        })
+      }).then(function (res) {
         console.log("resposta: ", res);
 
         if (res.ok) {
-          alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")   
+          alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")
 
           setTimeout(() => {
             window.location = "meulogin.html";
@@ -101,8 +126,12 @@
         console.log(`#ERRO: ${res}`);
       })
 
-    return false;
-        
+      return false;
+
+      }
     }
+
+  }
 </script>
+
 </html>

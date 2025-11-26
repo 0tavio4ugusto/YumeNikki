@@ -28,13 +28,27 @@
                 <canvas id="graficoCanvas"></canvas>
             </div>
             <div id="kpis">
-                <div id="kpi1"></div>
-                <div id="kpi2"></div>
+                <div id="kpi1">
+                </div>
+                <div id="ranking">
+                    <span style="background-color: transparent; font-size: 10px; margin-top: 15px; font-family: 'Press Start 2P', cursive; width: 250px; text-align: center;">RANKING DE TEMPO/SONHO</span>
+                    <select style="font-family: 'Press Start 2P', cursive; width: 250px;" onchange="chamarRanking()" name="" id="sonho">
+                        <option value="ap">Apartamento</option>
+                        <option value="predio">Predio</option>
+                        <option value="cassino">Cassino</option>
+                        <option value="engrenagens">Engrenagem</option>
+                        <option value="livraria">Livraria</option>
+                    </select>
+
+                    <div id="rankingEmSi">
+
+                    </div>
+                </div>
             </div>
         </div>
-        
+
         <img id="filtro" src="./assets/imgs/filtro.jpg" alt="">
-        
+
 
     </div>
 
@@ -69,7 +83,7 @@
         { idpagina: 1, nome: "Predio" },
         { idpagina: 2, nome: "livraria" },
         { idpagina: 3, nome: "Engrenagens" },
-        { idpagina: 4, nome: "Floresta" }
+        { idpagina: 4, nome: "Cassino" }
     ];
     function mostrarDash() {
         dash.style.display = 'block';
@@ -107,7 +121,8 @@
 
                     }
 
-                    kpi1.innerHTML = `${segredosPegos}/5`
+                    kpi1.innerHTML = `<span id="coisinha" style="background-color: transparent; font-size: 12px; font-family: 'Press Start 2P', cursive; width: 250px; text-align: center;"> SEGREDOS ENCONTRADOS </span>
+                      <span style = "background-color: transparent; font-family: 'Press Start 2P', cursive; margin-top: 20px;">${segredosPegos}/5</span>`
 
                 }
             })
@@ -358,11 +373,42 @@
                         beginAtZero: true,
                         max: 100
                     }
-                    
+
                 }
-            
+
             }
         });
+    }
+
+    function chamarRanking() {
+
+        rankingEmSi.innerHTML = ""
+
+
+        fetch("/usuarios/chamarRanking", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                sonho: sonho.value
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(JSON.stringify(data));
+                for (let index = 0; index < data.length; index++) {
+                    rankingEmSi.innerHTML += `${index + 1}° ${(data[index].nick).toUpperCase()} | ${(data[index].tempo / 60).toFixed(0)} MINUTOS <br><br>`
+
+                }
+
+
+
+            })
+            .catch(err => console.log("Erro no SELECT:", err));
+
+
+
     }
 
 

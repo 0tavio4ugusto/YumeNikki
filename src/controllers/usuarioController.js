@@ -60,6 +60,23 @@ function checar(req, res) {
 
 }
 
+function chamarRanking(req, res) {
+    var sonho = req.body.sonho
+
+    usuarioModel.ranking(sonho)
+        .then(function(resultadoRanking){
+            console.log(`\nResultados encontrados: ${resultadoRanking.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultadoRanking)}`);
+            res.json(resultadoRanking)
+        })
+          .catch(function (erro) {
+            console.log(erro)
+            console.log("\nHouve um erro ao puxar o ranking Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        })
+    
+}
+
 
 function contabilizarTempo(req, res) {
     var idUsuario = req.body.idUsuario;
@@ -142,5 +159,6 @@ module.exports = {
     cadastrar,
     checar,
     somar,
-    contabilizarTempo
+    contabilizarTempo,
+    chamarRanking
 }

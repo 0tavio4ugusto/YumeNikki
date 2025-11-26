@@ -5,75 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/geral.css">
-    <link rel="stylesheet" href="./css/engrenagens.css">
+    <link rel="stylesheet" href="css/geral.css">
+    <link rel="stylesheet" href="css/cassino.css">
 </head>
 
 <body>
-    <button onclick="acordar()" class="bordaPixel" id="acordar" type="button">ACORDAR</button>
+
 
     <div id="fundo">
-        <img src="./assets/livraria/engrenagens/fundoEngrenagens.jpg" alt="">
+        <img src="./assets/imgs/fundoCassino.jpg" alt="">
     </div>
 
-    <div id="containerEng">
-        <img id="eng1" class="eng" onclick="eng1()" src="./assets/livraria/engrenagens/engrenagem1.png">
-        <img id="eng2" class="eng" onclick="eng2()" src="./assets/livraria/engrenagens/engrenagem3.png">
-        <img id="eng3" class="eng" onclick="eng3()" src="./assets/livraria/engrenagens/engrenagem2.png">
-        <img id="eng4" class="eng" onclick="eng4()" src="./assets/livraria/engrenagens/engrenagem1.png">
-        <img id="eng5" class="eng" onclick="eng5()" src="./assets/livraria/engrenagens/engrenagem2.png">
-        <img id="eng6" class="eng" src="./assets/livraria/engrenagens/engrenagem1.png">
+    <button onclick="acordar()" class="bordaPixel" id="acordar" type="button">ACORDAR</button>
 
+    <div id="containerCassino">
+        <button id="rolar" onclick="escolherResultado()">JOGAR</button>
+        <div id="resultados">
+            <div class="negocinho" id="r1"></div>
+            <div class="negocinho" id="r2"></div>
+            <div class="negocinho" id="r3"></div>
+        </div>
+        <img src="./assets/maquina.png" alt="">
     </div>
-
-
 </body>
 
 <script>
-    function acordar() {
+    tempo = 0
+    idPagina = 4
 
-        window.location = 'apartamento.html'
+    emojis = [`🍇`, `🍊`, `🍌`, `🥭`]
+    result1 = ''
+    result2 = ''
+    result3 = ''
+    jogar = document.getElementById("rolar")
+
+    function escolherResultado() {
+        jogar.disabled = true
+
+        result1 = (Math.random() * 3).toFixed(0)
+        result2 = (Math.random() * 3).toFixed(0)
+        result3 = (Math.random() * 3).toFixed(0)
+
+        console.log(result1, result2, result3);
+
+        r1.innerHTML = emojis[result1]
+        r2.innerHTML = emojis[result2]
+        r3.innerHTML = emojis[result3]
+
+        if (result1 == result2 && result2 == result3) {
+            acharSegredo()
+            return       
+
+        }
+
+        setTimeout(() => {
+            jogar.disabled = false
+
+        }, 500);
+
+
+
 
     }
 
-    g1 = 0
-    g2 = 0
-    g3 = 0
-    g4 = 0
-    g5 = 0
-    g6 = 0
+    function acordar() {
+        window.location = 'apartamento.html'
+    }
 
-    g1Comb = 1
-    g2Comb = 1
-    g3Comb = 1
-    g4Comb = 1
-    g5Comb = 1
-    g6Comb = 1
+    function acharSegredo()
+    {
+        jogar.disabled = true
+        segredo()
 
-    setInterval(() => {
-          if (g1Comb == 2 && g2Comb == 2 && g3Comb == 3 && g4Comb == 2 && g5Comb == 4)
-        {
-            segredo()
-        }}, 2000);
-
-  
-
-
-    gear1 = document.getElementById('eng1')
-    gear2 = document.getElementById('eng2')
-    gear3 = document.getElementById('eng3')
-    gear4 = document.getElementById('eng4')
-    gear5 = document.getElementById('eng5')
-    gear6 = document.getElementById('eng6')
-
-    function eng1() {g1+=90; g1Comb++; gear1.style.transform = `rotate(${g1}deg)`; if(g1 == 360){g1 = 0}; if (g1Comb > 4) {g1Comb = 1} console.log(g1Comb);}
-    function eng2() {g2+=90; g2Comb++; gear2.style.transform = `rotate(${g2}deg)`; if(g2 == 360){g2 = 0}; if (g2Comb > 4) {g2Comb = 1} console.log(g2Comb);}
-    function eng3() {g3+=90; g3Comb++; gear3.style.transform = `rotate(${g3}deg)`; if(g3 == 360){g3 = 0}; if (g3Comb > 4) {g3Comb = 1} console.log(g3Comb);}
-    function eng4() {g4+=90; g4Comb++; gear4.style.transform = `rotate(${g4}deg)`; if(g4 == 360){g4 = 0}; if (g4Comb > 4) {g4Comb = 1} console.log(g4Comb);}
-    function eng5() {g5+=90; g5Comb++; gear5.style.transform = `rotate(${g5}deg)`; if(g5 == 360){g5 = 0}; if (g5Comb > 4) {g5Comb = 1} console.log(g5Comb);}
-
-    tempo = 0
-    idPagina = 3
+        
+    }
 
     fetch("/usuarios/checar", {
         method: "POST",
@@ -160,13 +165,13 @@
             },
             body: JSON.stringify({
                 idUsuario: sessionStorage.ID_USUARIO,
-                pagina: "engrenagens"
+                pagina: "cassino"
             })
         })
             .then(res => res.json())
             .then(data => {
                 console.log("Inserido com sucesso:", data);
-                alert("Você encontrou o segredo da sala das engrenagens!")
+                alert("Você encontrou o segredo da sala de jogos!")
                 setTimeout(() => {
                     window.location  = 'apartamento.html'
                 }, 2000);
@@ -236,7 +241,5 @@
     }
 
 </script>
-
-
 
 </html>

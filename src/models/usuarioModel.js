@@ -56,6 +56,15 @@ function contabilizarTempo(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function ranking(sonho) {
+    var instrucaoSql = `
+        SELECT * FROM view_ranking_${sonho};
+    `;
+    console.log("aaaExecutando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+
+}
+
 
 module.exports = {
     autenticar,
@@ -63,5 +72,6 @@ module.exports = {
     checar,
     contar,
     somar,
-    contabilizarTempo
+    contabilizarTempo,
+    ranking
 };
