@@ -46,4 +46,29 @@ idpagina INT,
     CONSTRAINT FOREIGN KEY fkusuarioo (idusuario) REFERENCES usuarios(idusuario)
 );
 
+CREATE VIEW view_ranking_ap AS
+SELECT u.nick AS nick, t.tempo AS tempo, t.idpagina AS idpagina 
+FROM usuarios u JOIN tempo t u.idusuario = t.idusuario 
+WHERE t.idpagina = 0 ORDER BY t.tempo DESC;
+
+CREATE VIEW view_ranking_predio AS
+SELECT u.nick AS nick, t.tempo AS tempo, t.idpagina AS idpagina 
+FROM usuarios u JOIN tempo t u.idusuario = t.idusuario 
+WHERE t.idpagina = 1 ORDER BY t.tempo DESC;
+
+CREATE VIEW view_ranking_engrenagem AS
+SELECT u.nick AS nick, t.tempo AS tempo, t.idpagina AS idpagina 
+FROM usuarios u JOIN tempo t u.idusuario = t.idusuario 
+WHERE t.idpagina = 3 ORDER BY t.tempo DESC;
+
+CREATE VIEW view_ranking_livraria AS
+SELECT u.nick AS nick, t.tempo AS tempo, t.idpagina AS idpagina 
+FROM usuarios u JOIN tempo t u.idusuario = t.idusuario 
+WHERE t.idpagina = 2 ORDER BY t.tempo DESC;
+
+CREATE VIEW view_ranking_cassino AS
+SELECT u.nick AS nick, t.tempo AS tempo, t.idpagina AS idpagina 
+FROM usuarios u JOIN tempo t u.idusuario = t.idusuario 
+WHERE t.idpagina = 4 ORDER BY t.tempo DESC;
+
 

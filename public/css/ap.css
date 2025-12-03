@@ -214,6 +214,20 @@
     margin-top: 15px;
 }
 
+.textoTutorial{
+    z-index: 5;
+    background-color: transparent;
+    color: white;
+    position: fixed;
+    width: 280px;
+    top: 140px;
+    left: 1178px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Press Start 2P', cursive;
+
+}
+
 
 #fechar{
     cursor: pointer;
